@@ -1,0 +1,7 @@
+.idea/
+out/
+web/Web/test/
+web/Web/node_modules/
+target/
+*.map
+*.iml

@@ -1,5 +1,7 @@
 .idea/
 out/
+gen-java/
+gen-js/
 web/Web/test/
 web/Web/node_modules/
 target/

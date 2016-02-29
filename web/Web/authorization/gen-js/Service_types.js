@@ -8,12 +8,16 @@
 User = function(args) {
   this.login = null;
   this.password = null;
+  this.id = null;
   if (args) {
     if (args.login !== undefined) {
       this.login = args.login;
     }
     if (args.password !== undefined) {
       this.password = args.password;
+    }
+    if (args.id !== undefined) {
+      this.id = args.id;
     }
   }
 };
@@ -45,6 +49,13 @@ User.prototype.read = function(input) {
         input.skip(ftype);
       }
       break;
+      case 3:
+      if (ftype == Thrift.Type.I32) {
+        this.id = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
       default:
         input.skip(ftype);
     }
@@ -64,6 +75,11 @@ User.prototype.write = function(output) {
   if (this.password !== null && this.password !== undefined) {
     output.writeFieldBegin('password', Thrift.Type.STRING, 2);
     output.writeString(this.password);
+    output.writeFieldEnd();
+  }
+  if (this.id !== null && this.id !== undefined) {
+    output.writeFieldBegin('id', Thrift.Type.I32, 3);
+    output.writeI32(this.id);
     output.writeFieldEnd();
   }
   output.writeFieldStop();

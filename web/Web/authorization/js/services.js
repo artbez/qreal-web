@@ -12,6 +12,7 @@ factory('loginClient',function($window, $q) {
             var user = new $window.User();
             user.login = message.login;
             user.password = message.password;
+            user.id = message.id;
             result = loginClient.login(user);
         	defered.resolve(result);
         	

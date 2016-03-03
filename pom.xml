@@ -263,6 +263,40 @@
             <artifactId>hibernate-core</artifactId>
             <version>4.3.6.Final</version>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-commons-annotations</artifactId>
+            <version>3.2.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+            <version>3.1.0.CR1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>antlr</artifactId>
+            <version>3.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>3.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>1.0.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.12.1.GA</version>
+        </dependency>
+
+
+
+
         <!--END Hibernate -->
 
 
@@ -273,6 +307,87 @@
     <testSourceDirectory>src/test/java</testSourceDirectory>
 
     <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>2.1</version>
+            <executions>
+                <execution>
+                    <id>copydep</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>copy-dependencies</goal>
+                    </goals>
+                    <inherited>false</inherited>
+                    <configuration>
+                        <includeArtifactIds>javassist</includeArtifactIds>
+                        <outputDirectory>web/web-inf/lib</outputDirectory>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>copydep1</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>copy-dependencies</goal>
+                    </goals>
+                    <inherited>false</inherited>
+                    <configuration>
+                        <includeArtifactIds>antlr</includeArtifactIds>
+                        <outputDirectory>web/web-inf/lib</outputDirectory>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>copydep2</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>copy-dependencies</goal>
+                    </goals>
+                    <inherited>false</inherited>
+                    <configuration>
+                        <includeArtifactIds>commons-logging</includeArtifactIds>
+                        <outputDirectory>web/web-inf/lib</outputDirectory>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>copydep3</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>copy-dependencies</goal>
+                    </goals>
+                    <inherited>false</inherited>
+                    <configuration>
+                        <includeArtifactIds>hibernate-commons-annotations</includeArtifactIds>
+                        <outputDirectory>web/web-inf/lib</outputDirectory>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>copydep4</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>copy-dependencies</goal>
+                    </goals>
+                    <inherited>false</inherited>
+                    <configuration>
+                        <includeArtifactIds>jta</includeArtifactIds>
+                        <outputDirectory>web/web-inf/lib</outputDirectory>
+                    </configuration>
+                </execution>
+            </executions>
+            <configuration>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.6</version>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <addClasspath>true</addClasspath>
+                    </manifest>
+                </archive>
+            </configuration>
+        </plugin>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>

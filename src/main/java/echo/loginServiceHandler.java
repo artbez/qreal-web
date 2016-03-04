@@ -7,11 +7,8 @@ public class loginServiceHandler implements loginService.Iface {
 	@Override
 	public boolean login(User user) throws TException {
 		ManageUser mu = new ManageUser();
-		User nUser = new User();
-		nUser.setLogin("123");
-		nUser.setPassword("123");
 		boolean result = false;
-		mu.contains(nUser);
+		result = mu.contains(user);
 		return result;
 	}
 

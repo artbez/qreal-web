@@ -1,4 +1,5 @@
 .idea/
+.idea/vcs.xml
 out/
 classes/
 web/Web/test/

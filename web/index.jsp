@@ -1,16 +1,16 @@
 <%--
   Created by IntelliJ IDEA.
-  echo.User: artemiibezguzikov
-  Date: 28.02.16
-  Time: 16:08
+  User: artemiibezguzikov
+  Date: 10.03.16
+  Time: 0:35
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>Services</title>
   </head>
   <body>
-  $END$
+  <a href="Web/authorization/index.html">registration servlet</a>
   </body>
 </html>

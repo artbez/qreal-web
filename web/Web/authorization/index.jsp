@@ -1,3 +1,5 @@
+<%@ include file="../include/include.jsp" %>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -26,33 +28,7 @@ Input: <input type="text" name="input" ng-model="input.text"><input type="submit
 <br/>
 Output: <label>{{output.text}}</label>
 -->
-<div id="top-nav" class="navbar navbar-inverse navbar-static-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">Dashboard</a>
-    </div>
-    <div class="navbar-collapse collapse">
-
-      <ul class="nav navbar-nav">
-
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Redactor<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a>Redactor</a></li>
-          </ul>
-        </li>
-
-      </ul>
-    </div>
-  </div>
-  <!-- /container -->
-</div>
-<!-- /Header -->
+<%@include file="../include/navbar.jsp"%>
 
 <form class="form-signin" name="input">
 
@@ -80,11 +56,6 @@ Output: <label>{{output.text}}</label>
 <script src="gen-js/Service_types.js"></script>
 <script src="gen-js/loginService.js"></script>
 <script src="gen-js/loginClient.js"></script>
-
-
-<script src="components/version/version.js"></script>
-<script src="components/version/version-directive.js"></script>
-<script src="components/version/interpolate-filter.js"></script>
 
 </body>
 </html>

@@ -225,7 +225,7 @@
                         </goals>
                         <inherited>false</inherited>
                         <configuration>
-                            <includeArtifactIds>javassist</includeArtifactIds>
+                            <includeArtifactIds>jstl</includeArtifactIds>
                             <outputDirectory>web/web-inf/lib</outputDirectory>
                         </configuration>
                     </execution>

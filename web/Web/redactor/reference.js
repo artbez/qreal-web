@@ -20,6 +20,8 @@
 /// <reference path="diagram/types/NodeTypesMap.ts" />
 /// <reference path="diagram/types/PropertiesMap.ts" />
 /// <reference path="diagram/types/Property.ts" />
+/// <reference path="gen-js/Diagram_types.d.ts" />
+/// <reference path="gen-js/Service_types.d.ts" />
 /// <reference path="vendor.d.ts" />
 //grunt-end 
 //# sourceMappingURL=reference.js.map

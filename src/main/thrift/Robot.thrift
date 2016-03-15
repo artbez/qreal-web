@@ -1,5 +1,4 @@
-namespace java artemii.bezguzikov.qrealweb
-namespace js artemii.bezguzikov.qrealweb
+namespace java robot
 
 include "Service.thrift"
 

@@ -1,4 +1,4 @@
-namespace java art.regservlet.qrealweb
+namespace java echo
 
 struct User {
     1: string login,

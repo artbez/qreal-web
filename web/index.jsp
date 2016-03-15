@@ -24,14 +24,19 @@
     <p>Here you can choose services to test</p>
   </div>
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <h3> <a href="Web/authorization/index.jsp"> Registration Service </a> </h3>
       <p>Here you can log in</p>
       <p>It sends request to loginServlet, which checks database</p>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <h3><a href = 'Web/robots/index.jsp'> Dashboard Service </a></h3>
       <p>Here you can register new robots and see which ase exist</p>
+      <p>Now it is not completed</p>
+    </div>
+    <div class="col-sm-4">
+      <h3><a href = 'Web/redactor/redactor.jsp'> Diagramm Service </a></h3>
+      <p>Here you can construct new diagrams</p>
       <p>Now it is not completed</p>
     </div>
   </div>

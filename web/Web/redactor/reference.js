@@ -20,18 +20,6 @@
 /// <reference path="diagram/types/NodeTypesMap.ts" />
 /// <reference path="diagram/types/PropertiesMap.ts" />
 /// <reference path="diagram/types/Property.ts" />
-/// <reference path="interpreter/Blocks/AbstractBlock.ts" />
-/// <reference path="interpreter/Blocks/FinalBlock.ts" />
-/// <reference path="interpreter/Blocks/FunctionBlock.ts" />
-/// <reference path="interpreter/Blocks/IfBlock.ts" />
-/// <reference path="interpreter/Blocks/Motors.ts" />
-/// <reference path="interpreter/Blocks/MotorsStop.ts" />
-/// <reference path="interpreter/Blocks/SmileBlock.ts" />
-/// <reference path="interpreter/Blocks/Timer.ts" />
-/// <reference path="interpreter/Blocks/initialBlock.ts" />
-/// <reference path="interpreter/Factory.ts" />
-/// <reference path="interpreter/InterpretManager.ts" />
-/// <reference path="interpreter/Parser/Parser.ts" />
 /// <reference path="vendor.d.ts" />
 //grunt-end 
 //# sourceMappingURL=reference.js.map

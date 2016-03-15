@@ -36,7 +36,7 @@ class DiagramController {
         this.initCustomContextMenu();
 
         $scope.$on("interpret", function(event, timeline) {
-            console.log(InterpretManager.interpret(controller.graph, controller.nodesMap, controller.linksMap, timeline));
+      //      console.log(InterpretManager.interpret(controller.graph, controller.nodesMap, controller.linksMap, timeline));
         });
     }
 
@@ -505,7 +505,7 @@ class DiagramController {
     }
 
     private loadGestures() {
-        var url = "resources/gestures.json";
+        var url = "../../resources/gestures.json";
         this.downloadData(url, this.processGestures.bind(this));
     }
 

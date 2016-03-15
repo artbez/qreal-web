@@ -7,3 +7,6 @@ web/Web/node_modules/
 target/
 *.map
 *.iml
+web/out.js
+web/.tscache
+web/node_modules

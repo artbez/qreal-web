@@ -21,6 +21,17 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <description></description>
+        <display-name>diagram.DiagramServlet</display-name>
+        <servlet-name>DiagramServlet</servlet-name>
+        <servlet-class>diagram.DiagramServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DiagramServlet</servlet-name>
+        <url-pattern>/DiagramServlet</url-pattern>
+    </servlet-mapping>
+
     <resource-ref>
         <description>This is a MySQL database connection</description>
         <res-ref-name>jdbc/ntest</res-ref-name>

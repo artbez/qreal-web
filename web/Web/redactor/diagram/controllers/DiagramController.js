@@ -363,19 +363,21 @@ var DiagramController = (function () {
             return;
         }
         var name = prompt("input name");
-        $.ajax({
-            type: 'POST',
-            url: 'save',
-            dataType: 'json',
-            contentType: 'application/json',
-            data: (ExportManager.exportDiagramStateToJSON(name, this.nodesMap, this.linksMap)),
-            success: function (response) {
-                console.log(response.message);
-            },
-            error: function (response, status, error) {
-                console.log("error: " + status + " " + error);
-            }
-        });
+        Exporter.export(name, this.nodesMap, this.linksMap);
+        /*   $.ajax({
+               type: 'POST',
+               url: 'save',
+               dataType: 'json',
+               contentType: 'application/json',
+               data: (ExportManager.exportDiagramStateToJSON(name, this.nodesMap, this.linksMap)),
+               success: function (response) {
+                   console.log(response.message);
+               },
+               error: function (response, status, error) {
+                   console.log("error: " + status + " " + error);
+               }
+           });
+           */
     };
     DiagramController.prototype.openDiagram = function () {
         if (!this.isPaletteLoaded) {

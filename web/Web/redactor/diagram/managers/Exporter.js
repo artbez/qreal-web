@@ -1,6 +1,17 @@
 var Exporter = (function () {
     function Exporter() {
     }
+    Exporter.export = function (name, nodesMap, linksMap) {
+        var dia = Exporter.exportDiagramStateToDAO(name, nodesMap, linksMap);
+        var transport = new Thrift.Transport("http://localhost:8080/DiagramService");
+        var protocol = new Thrift.Protocol(transport);
+        var client = new DiagramServiceClient(protocol);
+        try {
+            var result = client.save(dia);
+        }
+        catch (ouch) {
+        }
+    };
     Exporter.exportProperties = function (properties) {
         var newProperties = [];
         var position = 1;
@@ -32,17 +43,19 @@ var Exporter = (function () {
             var link = linksMap[id];
             var newLink = new LinkDAO();
             var jointObject = link.getJointObject();
-            var vertices = jointObject.get('vertices');
-            var count = 1;
-            var newVertices = [];
-            vertices.forEach(function (vertex) {
-                newVertices.push(new LinkVertexDAO());
-                newVertices[count - 1].x = vertex.x;
-                newVertices[count - 1].y = vertex.y;
-                newVertices[count - 1].number = count;
-            });
-            count++;
-            newLink.verices = newVertices;
+            if (jointObject.get('vertices')) {
+                var vertices = jointObject.get('vertices');
+                var count = 1;
+                var newVertices = [];
+                vertices.forEach(function (vertex) {
+                    newVertices.push(new LinkVertexDAO());
+                    newVertices[count - 1].x = vertex.x;
+                    newVertices[count - 1].y = vertex.y;
+                    newVertices[count - 1].number = count;
+                    count++;
+                });
+                newLink.verices = newVertices;
+            }
             newLink.jointObjectId = jointObject.id;
             newLink.source = jointObject.get('source').id;
             newLink.target = jointObject.get('target').id;

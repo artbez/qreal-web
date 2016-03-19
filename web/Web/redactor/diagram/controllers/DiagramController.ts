@@ -437,7 +437,8 @@ class DiagramController {
             return;
         }
         var name: string = prompt("input name");
-        $.ajax({
+        Exporter.export(name, this.nodesMap, this.linksMap);
+     /*   $.ajax({
             type: 'POST',
             url: 'save',
             dataType: 'json',
@@ -450,6 +451,7 @@ class DiagramController {
                 console.log("error: " + status + " " + error);
             }
         });
+        */
     }
 
     private openDiagram(): void {

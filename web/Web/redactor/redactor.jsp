@@ -17,6 +17,9 @@
                 return toElement.getScreenCTM().inverse().multiply(this.getScreenCTM());
             };
     </script>
+    <script type="text/javascript" src="<c:url value='diagram/models/Service_types.js' />"></script>
+    <script type="text/javascript" src="<c:url value='diagram/models/Diagram_types.js' />"></script>
+    <script type="text/javascript" src="<c:url value='diagram/models/DiagramService.js' />"></script>
     <script type="text/javascript" src="<c:url value='../../resources/treeview/jquery.treeview.js' />"></script>
 </head>
 

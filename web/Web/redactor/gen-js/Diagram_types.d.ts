@@ -21,9 +21,9 @@ declare class DefaultDiagramNodeDAO {
   type: string;
   x: number;
   y: number;
-  propertes: PropertyDAO[];
+  properties: PropertyDAO[];
 
-  constructor(args?: { nodeId: number; jointObject: string; type: string; x: number; y: number; propertes: PropertyDAO[]; });
+  constructor(args?: { nodeId: number; jointObject: string; type: string; x: number; y: number; properties: PropertyDAO[]; });
 }
 
 declare class LinkVertexDAO {

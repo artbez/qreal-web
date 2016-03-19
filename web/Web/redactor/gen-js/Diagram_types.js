@@ -125,7 +125,7 @@ DefaultDiagramNodeDAO = function(args) {
   this.type = null;
   this.x = null;
   this.y = null;
-  this.propertes = null;
+  this.properties = null;
   if (args) {
     if (args.nodeId !== undefined) {
       this.nodeId = args.nodeId;
@@ -142,8 +142,8 @@ DefaultDiagramNodeDAO = function(args) {
     if (args.y !== undefined) {
       this.y = args.y;
     }
-    if (args.propertes !== undefined) {
-      this.propertes = args.propertes;
+    if (args.properties !== undefined) {
+      this.properties = args.properties;
     }
   }
 };
@@ -200,7 +200,7 @@ DefaultDiagramNodeDAO.prototype.read = function(input) {
       if (ftype == Thrift.Type.SET) {
         var _size0 = 0;
         var _rtmp34;
-        this.propertes = [];
+        this.properties = [];
         var _etype3 = 0;
         _rtmp34 = input.readSetBegin();
         _etype3 = _rtmp34.etype;
@@ -210,7 +210,7 @@ DefaultDiagramNodeDAO.prototype.read = function(input) {
           var elem6 = null;
           elem6 = new PropertyDAO();
           elem6.read(input);
-          this.propertes.push(elem6);
+          this.properties.push(elem6);
         }
         input.readSetEnd();
       } else {
@@ -253,14 +253,14 @@ DefaultDiagramNodeDAO.prototype.write = function(output) {
     output.writeDouble(this.y);
     output.writeFieldEnd();
   }
-  if (this.propertes !== null && this.propertes !== undefined) {
-    output.writeFieldBegin('propertes', Thrift.Type.SET, 6);
-    output.writeSetBegin(Thrift.Type.STRUCT, this.propertes.length);
-    for (var iter7 in this.propertes)
+  if (this.properties !== null && this.properties !== undefined) {
+    output.writeFieldBegin('properties', Thrift.Type.SET, 6);
+    output.writeSetBegin(Thrift.Type.STRUCT, this.properties.length);
+    for (var iter7 in this.properties)
     {
-      if (this.propertes.hasOwnProperty(iter7))
+      if (this.properties.hasOwnProperty(iter7))
       {
-        iter7 = this.propertes[iter7];
+        iter7 = this.properties[iter7];
         iter7.write(output);
       }
     }

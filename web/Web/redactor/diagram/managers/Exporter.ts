@@ -2,15 +2,7 @@ class Exporter {
 
     static export(name: string, nodesMap, linksMap) {
         var dia : DiagramDAO = Exporter.exportDiagramStateToDAO(name, nodesMap, linksMap);
-        var transport = new Thrift.Transport("http://localhost:8080/DiagramService");
-        var protocol  = new Thrift.Protocol(transport);
-        var client    = new DiagramServiceClient(protocol);
-        try {
-            var result = client.save(dia);
-        } catch (ouch) {
-            //have to handle error
-        }
-
+        return dia;
     }
 
     private static exportProperties(properties: PropertiesMap) {

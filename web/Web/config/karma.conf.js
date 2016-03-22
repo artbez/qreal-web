@@ -3,17 +3,17 @@ module.exports = function(config){
     basePath : '../',
 
     files : [
-      'app/lib/angular/angular.js',
-      'app/lib/angular/angular-*.js',
-      'test/lib/angular/angular-mocks.js',
-      'app/js/**/*.js',
-      'test/unit/**/*.js'
+      'authorization/lib/angular/angular.js',
+      'authorization/lib/angular/angular-*.js',
+      'authorization/test/lib/angular/angular-mocks.js',
+      'authorization/js/**/*.js',
+      'authorization/test/unit/**/*.js'
     ],
 
     exclude : [
-      'app/lib/angular/angular-loader.js',
-      'app/lib/angular/*.min.js',
-      'app/lib/angular/angular-scenario.js'
+      'authorization/lib/angular/angular-loader.js',
+      'authorization/lib/angular/*.min.js',
+      'authorization/lib/angular/angular-scenario.js'
     ],
 
     autoWatch : true,
@@ -30,7 +30,7 @@ module.exports = function(config){
             ],
 
     junitReporter : {
-      outputFile: 'test_out/unit.xml',
+      outputFile: 'authorization/test_out/unit.xml',
       suite: 'unit'
     }
 

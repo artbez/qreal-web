@@ -3,14 +3,7 @@ var Exporter = (function () {
     }
     Exporter.export = function (name, nodesMap, linksMap) {
         var dia = Exporter.exportDiagramStateToDAO(name, nodesMap, linksMap);
-        var transport = new Thrift.Transport("http://localhost:8080/DiagramService");
-        var protocol = new Thrift.Protocol(transport);
-        var client = new DiagramServiceClient(protocol);
-        try {
-            var result = client.save(dia);
-        }
-        catch (ouch) {
-        }
+        return dia;
     };
     Exporter.exportProperties = function (properties) {
         var newProperties = [];

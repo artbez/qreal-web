@@ -18,9 +18,6 @@ angular.module('myApp.controllers', []).
 				} else {
 					$window.location.href = '#/view2';
 				}
-				if(!$scope.$$phase) {
-					$scope.$apply();
-				}
 			});
       };
  }])

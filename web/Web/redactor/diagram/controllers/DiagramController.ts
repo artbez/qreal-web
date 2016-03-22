@@ -437,21 +437,18 @@ class DiagramController {
             return;
         }
         var name: string = prompt("input name");
-        Exporter.export(name, this.nodesMap, this.linksMap);
-     /*   $.ajax({
-            type: 'POST',
-            url: 'save',
-            dataType: 'json',
-            contentType: 'application/json',
-            data: (ExportManager.exportDiagramStateToJSON(name, this.nodesMap, this.linksMap)),
-            success: function (response) {
-                console.log(response.message);
-            },
-            error: function (response, status, error) {
-                console.log("error: " + status + " " + error);
-            }
-        });
-        */
+        var dia = Exporter.export(name, this.nodesMap, this.linksMap);
+        // need to be corrected
+        dia.nodes = null;
+        var transport = new Thrift.Transport("http://localhost:8080/DiagramServlet");
+        var protocol  = new Thrift.Protocol(transport);
+        var client    = new DiagramServiceClient(protocol);
+
+        try {
+            result = client.save(dia);
+        } catch (ouch) {
+            //have to handle error
+        }
     }
 
     private openDiagram(): void {

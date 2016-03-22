@@ -1,33 +1,16 @@
 <%@ include file="../include/include.jsp" %>
 
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
   <title>Login</title>
   <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="css/login.css"/>
   <link rel="stylesheet" href="css/error.css"/>
 </head>
 <body ng-app="myApp" ng-controller="echoServiceController" class="container">
-<!--
-<h3>Simple Echo Service to Demo Thrift JS Client Integration with Angular</h3>
-Input: <input type="text" name="input" ng-model="input.text"><input type="submit" value="echo" ng-click="echo()"><br>
-<br/>
-Output: <label>{{output.text}}</label>
--->
+
 <%@include file="../include/navbar.jsp"%>
 
 <form class="form-signin" name="input">

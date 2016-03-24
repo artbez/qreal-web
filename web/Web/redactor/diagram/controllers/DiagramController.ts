@@ -438,14 +438,12 @@ class DiagramController {
         }
         var name: string = prompt("input name");
         var dia = Exporter.export(name, this.nodesMap, this.linksMap);
-        // need to be corrected
-        dia.nodes = null;
         var transport = new Thrift.Transport("http://localhost:8080/DiagramServlet");
         var protocol  = new Thrift.Protocol(transport);
         var client    = new DiagramServiceClient(protocol);
 
         try {
-            result = client.save(dia);
+            var result = client.save(dia);
         } catch (ouch) {
             //have to handle error
         }
@@ -504,7 +502,7 @@ class DiagramController {
     }
 
     private loadGestures() {
-        var url = "../../resources/gestures.json";
+        var url = "../resources/gestures.json";
         this.downloadData(url, this.processGestures.bind(this));
     }
 

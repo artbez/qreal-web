@@ -7,13 +7,13 @@ class Exporter {
 
     private static exportProperties(properties: PropertiesMap) {
         var newProperties : PropertyDAO[] = [];
-        var position: number = 1;
+        var position: number = 0;
         for (var propertyName in properties) {
             newProperties.push(new PropertyDAO());
-            newProperties[position - 1].name = propertyName.name;
-            newProperties[position - 1].value = properties[propertyName].value;
-            newProperties[position - 1].type = properties[propertyName].type;
-            newProperties[position - 1].position = position;
+            newProperties[position].name = propertyName.name;
+            newProperties[position].value = properties[propertyName].value;
+            newProperties[position].type = properties[propertyName].type;
+            newProperties[position].position = position;
             position++;
         }
         return newProperties;
@@ -24,7 +24,8 @@ class Exporter {
         for (var id in nodesMap) {
             var node : DiagramNode = nodesMap[id];
             var newNode = new DefaultDiagramNodeDAO();
-            newNode.nodeId = node.getJointObject().id;
+            var jointObject = node.getJointObject();
+            newNode.jointObject = jointObject.id;
             newNode.type = node.getType();
             newNode.x = node.getX();
             newNode.y = node.getY();
@@ -40,14 +41,14 @@ class Exporter {
             if (jointObject.get('vertices')) {
                 var vertices = jointObject.get('vertices');
 
-                var count:number = 1;
+                var count:number = 0;
 
                 var newVertices:LinkVertexDAO[] = []
                 vertices.forEach(function (vertex) {
                     newVertices.push(new LinkVertexDAO());
-                    newVertices[count - 1].x = vertex.x;
-                    newVertices[count - 1].y = vertex.y;
-                    newVertices[count - 1].number = count;
+                    newVertices[count].x = vertex.x;
+                    newVertices[count].y = vertex.y;
+                    newVertices[count].number = count;
                     count++;
                 });
                 newLink.verices = newVertices;

@@ -13,5 +13,6 @@
         <property name="show_sql">true</property>
 
         <mapping resource="echo/User.hbm.xml"></mapping>
+        <mapping resource="diagram/Diagram.hbm.xml"></mapping>
     </session-factory>
 </hibernate-configuration>

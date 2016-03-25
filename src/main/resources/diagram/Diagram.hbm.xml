@@ -28,7 +28,7 @@
            <generator class="identity"/>
        </id>
        <property name="jointObject" type="java.lang.String">
-           <column name="node_object_id" length="50" not-null="true"/>
+           <column name="joint_object_id" length="50" not-null="true"/>
        </property>
        <property name="type" type="java.lang.String">
            <column name="type" length="50" not-null="true"/>
@@ -39,10 +39,6 @@
        <property name="y" type="java.lang.Double">
            <column name="y" not-null="true"/>
        </property>
-        <set name="properties" table="diagrams" order-by="position">
-            <key column="node_id"></key>
-            <many-to-many column="diagram_id" unique="true" class="diagram.DiagramDAO"/>
-        </set>
     </class>
 
     <class name="diagram.LinkVertexDAO" table="vertices">
@@ -75,9 +71,6 @@
         <property name="target" type="java.lang.String">
             <column name="target" length="50" not-null="true"/>
         </property>
-        <join table="vertices" optional="true">
-            <key></key>
-        </join>
 </class>
 
     <class name="diagram.DiagramDAO" table="diagrams">

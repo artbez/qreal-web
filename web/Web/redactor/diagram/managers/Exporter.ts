@@ -24,8 +24,7 @@ class Exporter {
         for (var id in nodesMap) {
             var node : DiagramNode = nodesMap[id];
             var newNode = new DefaultDiagramNodeDAO();
-            var jointObject = node.getJointObject();
-            newNode.jointObject = jointObject.id;
+            newNode.jointObject = node.getJointObject().id;
             newNode.type = node.getType();
             newNode.x = node.getX();
             newNode.y = node.getY();
@@ -61,6 +60,7 @@ class Exporter {
         }
         var dia: DiagramDAO = new DiagramDAO();
         dia.name = name;
+        dia.user = "test";
         dia.nodes = mnode;
         dia.links = mlink;
 

@@ -549,7 +549,7 @@ LinkDAO.prototype.write = function(output) {
 DiagramDAO = function(args) {
   this.diagramId = null;
   this.name = null;
-  this.creator = null;
+  this.user = null;
   this.nodes = null;
   this.links = null;
   if (args) {
@@ -559,8 +559,8 @@ DiagramDAO = function(args) {
     if (args.name !== undefined) {
       this.name = args.name;
     }
-    if (args.creator !== undefined) {
-      this.creator = args.creator;
+    if (args.user !== undefined) {
+      this.user = args.user;
     }
     if (args.nodes !== undefined) {
       this.nodes = args.nodes;
@@ -599,9 +599,8 @@ DiagramDAO.prototype.read = function(input) {
       }
       break;
       case 3:
-      if (ftype == Thrift.Type.STRUCT) {
-        this.creator = new User();
-        this.creator.read(input);
+      if (ftype == Thrift.Type.STRING) {
+        this.user = input.readString().value;
       } else {
         input.skip(ftype);
       }
@@ -669,9 +668,9 @@ DiagramDAO.prototype.write = function(output) {
     output.writeString(this.name);
     output.writeFieldEnd();
   }
-  if (this.creator !== null && this.creator !== undefined) {
-    output.writeFieldBegin('creator', Thrift.Type.STRUCT, 3);
-    this.creator.write(output);
+  if (this.user !== null && this.user !== undefined) {
+    output.writeFieldBegin('user', Thrift.Type.STRING, 3);
+    output.writeString(this.user);
     output.writeFieldEnd();
   }
   if (this.nodes !== null && this.nodes !== undefined) {

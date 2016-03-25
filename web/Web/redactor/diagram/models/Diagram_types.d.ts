@@ -49,9 +49,9 @@ declare class LinkDAO {
 declare class DiagramDAO {
   diagramId: number;
   name: string;
-  creator: User;
+  user: string;
   nodes: DefaultDiagramNodeDAO[];
   links: LinkDAO[];
 
-  constructor(args?: { diagramId: number; name: string; creator: User; nodes: DefaultDiagramNodeDAO[]; links: LinkDAO[]; });
+  constructor(args?: { diagramId: number; name: string; user: string; nodes: DefaultDiagramNodeDAO[]; links: LinkDAO[]; });
 }

@@ -1,5 +1,4 @@
 namespace java diagram
-include "Service.thrift"
 
 struct PropertyDAO {
     1 : i64 propertyId,
@@ -37,7 +36,7 @@ struct LinkDAO {
 struct DiagramDAO {
     1 : i64 diagramId,
     2 : string name,
-    3 : Service.User creator,
+    3 : string user,
     4 : set<DefaultDiagramNodeDAO> nodes,
     5 : set<LinkDAO> links
 }

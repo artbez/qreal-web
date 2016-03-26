@@ -7,18 +7,17 @@ import org.apache.thrift.TException;
  */
 public class DiagramServiceHandler implements DiagramService.Iface {
 
-    DiagramDAO last;
-
     @Override
     public boolean save(DiagramDAO dia) throws TException {
         ManageDiagram manager = new ManageDiagram();
         manager.saveDiagram(dia);
-        last = new DiagramDAO(dia);
         return false;
     }
 
     @Override
     public DiagramDAO open(String name) throws TException {
-        return last != null ? last : new DiagramDAO();
+        ManageDiagram manager = new ManageDiagram();
+        DiagramDAO dia = manager.openDiagram(name);
+        return dia;
     }
 }

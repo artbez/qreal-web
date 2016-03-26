@@ -1,16 +1,20 @@
 package diagram;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import persistence.HibernateUtil;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by artemiibezguzikov on 25.03.16.
  */
 public class TestDBDia {
-    public static void main(String[] args) {
+
+    static void saveTest() {
+
         PropertyDAO prop = new PropertyDAO();
         prop.name = "name";
         prop.value = "value";
@@ -73,5 +77,26 @@ public class TestDBDia {
         session.save(dia);
         session.getTransaction().commit();;
         session.close();
+    }
+
+    static void openTest(String diaName) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query hql = session.createQuery("FROM DiagramDAO WHERE name = :diaName");
+        hql.setParameter("diaName", diaName);
+        List list = hql.list();
+        for (Iterator iterator = list.iterator(); iterator.hasNext(); )
+        {
+            DiagramDAO dia = (DiagramDAO) iterator.next();
+            System.out.println(dia.toString());
+        }
+
+        session.getTransaction().commit();
+        session.close();
+
+    }
+
+    public static void main(String[] args) {
+        openTest("dia");
     }
 }

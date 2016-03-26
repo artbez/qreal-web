@@ -1,9 +1,11 @@
 package diagram;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import persistence.HibernateUtil;
 
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by artemiibezguzikov on 26.03.16.
@@ -43,9 +45,20 @@ public class ManageDiagram {
     }
 
     DiagramDAO openDiagram(String name) {
-        // Here supposed database connection
-        DiagramDAO dia = new DiagramDAO();
-        return dia;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Query hql = session.createQuery("FROM DiagramDAO WHERE name = :diaName");
+        hql.setParameter("diaName", name);
+        List list = hql.list();
+        for (Iterator iterator = list.iterator(); iterator.hasNext(); )
+        {
+            DiagramDAO dia = (DiagramDAO) iterator.next();
+            System.out.println(dia.toString());
+        }
+
+        session.getTransaction().commit();
+        session.close();
+        return (DiagramDAO) list.get(0);
     }
 
 }

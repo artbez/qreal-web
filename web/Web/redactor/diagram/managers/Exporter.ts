@@ -10,7 +10,7 @@ class Exporter {
         var position: number = 0;
         for (var propertyName in properties) {
             newProperties.push(new PropertyDAO());
-            newProperties[position].name = propertyName.name;
+            newProperties[position].name = propertyName;
             newProperties[position].value = properties[propertyName].value;
             newProperties[position].type = properties[propertyName].type;
             newProperties[position].position = position;
@@ -37,21 +37,6 @@ class Exporter {
             var link: Link = linksMap[id];
             var newLink: LinkDAO = new LinkDAO();
             var jointObject = link.getJointObject();
-            if (jointObject.get('vertices')) {
-                var vertices = jointObject.get('vertices');
-
-                var count:number = 0;
-
-                var newVertices:LinkVertexDAO[] = []
-                vertices.forEach(function (vertex) {
-                    newVertices.push(new LinkVertexDAO());
-                    newVertices[count].x = vertex.x;
-                    newVertices[count].y = vertex.y;
-                    newVertices[count].number = count;
-                    count++;
-                });
-                newLink.verices = newVertices;
-            }
             newLink.jointObjectId = jointObject.id;
             newLink.source = jointObject.get('source').id;
             newLink.target = jointObject.get('target').id;

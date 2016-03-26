@@ -19,7 +19,6 @@
 /// <reference path="diagram/models/DiagramService.d.ts" />
 /// <reference path="diagram/models/Diagram_types.d.ts" />
 /// <reference path="diagram/models/Link.ts" />
-/// <reference path="diagram/models/Service_types.d.ts" />
 /// <reference path="diagram/types/NodeType.ts" />
 /// <reference path="diagram/types/NodeTypesMap.ts" />
 /// <reference path="diagram/types/PropertiesMap.ts" />

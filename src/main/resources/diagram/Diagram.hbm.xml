@@ -41,22 +41,6 @@
        </property>
     </class>
 
-    <class name="diagram.LinkVertexDAO" table="vertices">
-        <id name="vertexId" type="java.lang.Long">
-            <column name="vertex_id"/>
-            <generator class="identity"/>
-        </id>
-        <property name="x" type="java.lang.Double">
-            <column name="x" not-null="true"/>
-        </property>
-        <property name="y" type="java.lang.Double">
-            <column name="y" not-null="true"/>
-        </property>
-        <property name="number" type="java.lang.Integer">
-            <column name="number" not-null="true"/>
-        </property>
-    </class>
-
     <class name="diagram.LinkDAO" table="links">
         <id name="linkId" type="java.lang.Long">
             <column name="link_id"/>
@@ -80,9 +64,6 @@
         </id>
         <property name="name" type="java.lang.String">
             <column name="name" length="50" not-null="true"/>
-        </property>
-        <property name="user" type="java.lang.String">
-            <column name="username" length="50" not-null="true"/>
         </property>
     </class>
 </hibernate-mapping>

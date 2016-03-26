@@ -64,10 +64,6 @@ public class TestDBDia {
         Iterator<LinkDAO> itrL = dia.links.iterator();
         while (itrL.hasNext()) {
             LinkDAO linkd = itrL.next();
-            Iterator<LinkVertexDAO> itrV = linkd.verices.iterator();
-            while (itrV.hasNext()) {
-                session.save(itrV.next());
-            }
             Iterator<PropertyDAO> itrP = linkd.properties.iterator();
             while (itrP.hasNext()) {
                 session.save(itrP.next());

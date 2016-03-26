@@ -15,4 +15,8 @@ declare class DiagramServiceClient {
   save(dia: DiagramDAO): boolean;
 
   save(dia: DiagramDAO, callback: Function): void;
+
+  open(name: string): DiagramDAO;
+
+  open(name: string, callback: Function): void;
 }

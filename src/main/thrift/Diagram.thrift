@@ -43,4 +43,5 @@ struct DiagramDAO {
 
 service DiagramService {
     bool save(1:DiagramDAO dia);
+    DiagramDAO open(1:string name);
 }

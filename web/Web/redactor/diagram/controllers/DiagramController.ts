@@ -456,24 +456,15 @@ class DiagramController {
         }
         var controller = this;
         var name: string = prompt("input diagram name");
-        $.ajax({
-            type: 'POST',
-            url: 'open',
-            dataType: 'json',
-            contentType: 'application/json',
-            data: (JSON.stringify({name: name})),
-            success: function (response) {
-                controller.clear();
-                ImportManager.import(response, controller.graph, controller.nodesMap,
-                    controller.linksMap, controller.nodeTypesMap);
-            },
-            error: function (response, status, error) {
-                if (status === "parsererror") {
-                    alert("Diagram with this name does not exist");
-                }
-                console.log("error: " + status + " " + error);
-            }
-        });
+        var transport = new Thrift.Transport("http://localhost:8080/DiagramServlet");
+        var protocol  = new Thrift.Protocol(transport);
+        var client    = new DiagramServiceClient(protocol);
+        try {
+            var dia = client.open(name);
+            Importer.import(dia, controller.graph, controller.nodesMap, controller.linksMap, controller.nodeTypesMap);
+        } catch (ouch) {
+            //have to handle error
+        }
     }
 
     private makeUnselectable(element) {

@@ -42,4 +42,10 @@ public class ManageDiagram {
 
     }
 
+    DiagramDAO openDiagram(String name) {
+        // Here supposed database connection
+        DiagramDAO dia = new DiagramDAO();
+        return dia;
+    }
+
 }

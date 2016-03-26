@@ -39,6 +39,10 @@
        <property name="y" type="java.lang.Double">
            <column name="y" not-null="true"/>
        </property>
+        <set name="properties" table="properties" order-by="position" fetch="join">
+            <key column="node_id"></key>
+            <one-to-many class="diagram.PropertyDAO"/>
+        </set>
     </class>
 
     <class name="diagram.LinkDAO" table="links">
@@ -55,7 +59,12 @@
         <property name="target" type="java.lang.String">
             <column name="target" length="50" not-null="true"/>
         </property>
-</class>
+        <set name="properties" table="properties" order-by="position" fetch="join">
+            <key column="link_id"></key>
+            <one-to-many class="diagram.PropertyDAO"/>
+        </set>
+
+    </class>
 
     <class name="diagram.DiagramDAO" table="diagrams">
         <id name="diagramId" type="java.lang.Long">
@@ -65,5 +74,13 @@
         <property name="name" type="java.lang.String">
             <column name="name" length="50" not-null="true"/>
         </property>
+        <set name="nodes" table="nodes" fetch="join">
+            <key column="diagram_id"></key>
+            <one-to-many class="diagram.DefaultDiagramNodeDAO"/>
+        </set>
+        <set name="links" table="links" fetch="join">
+            <key column="diagram_id"></key>
+            <one-to-many class="diagram.LinkDAO"/>
+        </set>
     </class>
 </hibernate-mapping>

@@ -13,6 +13,180 @@
         $(document).ready(function () {
         });
     </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#target").click(function () {
+                var robots = JSON.parse('${robots}');
+                robots.forEach(function (robot) {
+                    addLabel(robot);
+                });
+            });
+
+            $("#registerRobot").click(function () {
+
+
+                var name = $('#robotName').val();
+                var code = $('#ssid').val();
+                (function() {
+                    var transport = new Thrift.TXHRTransport("http://localhost:8085/myservlet");
+                    var protocol  = new Thrift.TJSONProtocol(transport);
+                    var client    = new AdditionServiceClient(protocol);
+                    client.ping();
+                    //   console.log(result);
+                })();
+                var data = "robotName=" + name + "&ssid=" + code;
+                $.ajax({
+                    type: 'POST',
+                    url: 'registerRobot',
+                    data: data,
+                    success: function (response) {
+                        var result = JSON.parse(response);
+                        if (result.status == "OK") {
+                            location.reload();
+                        } else {
+                        }
+                    },
+                    error: function (response, status, error) {
+                        console.log("error");
+                    }
+                });
+            });
+
+            $('[name="deleteRobot"]').click(function (event) {
+                var robotName = event.target.id.substring(7);
+                var data = "robotName=" + robotName;
+                $.ajax({
+                    type: 'POST',
+                    url: 'deleteRobot',
+                    data: data,
+                    success: function (data) {
+                        location.reload();
+                    },
+                    error: function (response, status, error) {
+                        console.log("error");
+                    }
+                });
+            });
+
+            $('[name="sendDiagram"]').click(function (event) {
+                var robotName = event.target.id.substring(13);
+                var data = "robotName=" + robotName + "&program=" + "MUR MUR MUR";
+                $.ajax({
+                    type: 'POST',
+                    url: 'sendDiagram',
+                    data: data,
+                    success: function (data) {
+                        $('#sendDiagramModal-' + robotName).modal('hide');
+                        alert("Successfully sent ");
+                    },
+                    error: function (response, status, error) {
+                        console.log("error");
+                    }
+                });
+            });
+
+
+            $('[name="saveModelConfig"]').click(function (event) {
+                var robotName = event.target.id.substring(18);
+                var name = robotName + "-port";
+                var o = [];
+                $('[name="' + name + '"]').each(function (index, value) {
+                    var obj = {};
+                    var key = $(value).text();
+                    var valueElementName = '[name="' + robotName + '-' + key + '"]';
+                    var attr = $(valueElementName).attr("data-content");
+
+                    if (typeof attr !== typeof undefined && attr !== false) {
+                        obj[key] = $(valueElementName).attr("data-content");
+                    } else {
+                        obj[key] = $(valueElementName).text();
+                    }
+                    o.push(obj); // push in the "o" object created
+                });
+
+                var typeProperties = [];
+                $('[name="propertyForm-' + robotName + '"]').each(function (index, value) {
+                    var obj = {};
+                    obj["type"] = $(value).attr("id").substring(5);
+                    $(value).find(':input').each(function (index2, value2) {
+                        obj[$(value2).attr("name")] = $(value2).val();
+                    });
+                    typeProperties.push(obj);
+                });
+
+                var data = "robotName=" + robotName + "&modelConfigJson=" + JSON.stringify(o) +
+                        "&typeProperties=" + JSON.stringify(typeProperties);
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'saveModelConfig',
+                    data: data,
+                    success: function (response) {
+                        var result = JSON.parse(response);
+                        if (result.status == "OK") {
+                            $('#configureRobotModal-' + robotName).modal('hide');
+                            $('#validationError-' + robotName).hide();
+                            alert("Successfully saved ");
+                        } else {
+                        }
+                    },
+                    error: function (response, status, error) {
+                        alert(JSON.parse(response).message);
+
+                    }
+                });
+            });
+
+
+            $("#configureMenu a").click(function (event) {
+                event.preventDefault(); //prevent synchronous loading
+                var id = event.target.id.substring(2);
+                var option = $(this).text();
+                if (option.length > 9) {
+                    var diff = option.length - 9;
+                    option = option.substring(0, option.length - diff);
+                    $("#" + id).attr("data-content", $(this).text());
+                }
+                $("#" + id).html(option);
+            });
+
+            $("#configureDeviceMenu a").click(function (event) {
+                event.preventDefault(); //prevent synchronous loading
+                var robotName = event.target.id.substring(14);
+                var option = $(this).text();
+                $("#deviceType-" + robotName).attr("data-content", option);
+                $("#deviceType-" + robotName).html(option);
+                $('[name="propertyType-' + robotName + '"]').hide();
+                $("#property-" + robotName + '-' + option).show();
+            });
+
+            $('[data-toggle="tooltip"]').tooltip({
+                'placement': 'top'
+            });
+            $('[data-toggle="popover"]').popover({
+                trigger: 'hover',
+                'placement': 'top'
+            });
+
+
+            $(window).load(function () {
+                $('[data-toggle="popover"]').each(function (index, value) {
+                    var option = $(value).text();
+
+                    if (option.length > 9) {
+                        var diff = option.length - 9;
+                        option = option.substring(0, option.length - diff);
+                        $(value).attr("data-content", $(value).text());
+                        $(value).text(option);
+                    }
+                });
+            });
+
+
+        });
+    </script>
+
     <style>
         .dropdown-submenu {
             position: relative;
@@ -111,7 +285,279 @@
 
 
                     <div class="row">
-                       <!-- center left-->
+                        <!-- center left-->
+
+                        <c:forEach var="robotWrapper" items="${robotsWrapper}">
+                            <c:set var="robot" value="${robotWrapper.robot}"/>
+
+                            <div class="modal fade" id="sendDiagramModal-${robot.name}" tabindex="-1" role="dialog"
+                                 aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close"
+                                                    data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="sendDiagramLabel">Send diagram</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <h4>Select diagram</h4>
+                                            <select class="form-control">
+                                                <c:forEach var="diagram" items="${user.diagrams}">
+                                                    <option>${diagram.name}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" name="sendDiagram"
+                                                    id="send-diagram-${robot.name}"
+                                                    class="btn btn-primary">Send
+                                            </button>
+                                            <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">Close
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="configureRobotModal-${robot.name}" tabindex="-1" role="dialog"
+                                 aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close"
+                                                    data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="configureModalLabel">Configure robot</h4>
+
+                                            <div id="validationError-${robot.name}" class="error" hidden></div>
+
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#portsConfig-${robot.name}"
+                                                                      data-toggle="tab">Ports</a>
+                                                </li>
+                                                <li><a href="#devicesConfig-${robot.name}" data-toggle="tab">Devices</a>
+                                                </li>
+                                            </ul>
+                                            <div id="myTabContent33" class="tab-content">
+                                                <c:set var="systemConfig"
+                                                       value="${robotWrapper.robotInfo.systemConfigObject}"/>
+                                                <div class="tab-pane active in" id="portsConfig-${robot.name}">
+                                                    <div class="row">
+                                                        <c:set var="modelConfig"
+                                                               value="${robotWrapper.robotInfo.modelConfigObject}"/>
+                                                        <c:forEach var="port" items="${systemConfig.ports}">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                <span class="input-group-addon"
+                                                                      name="${robot.name}-port">${port.name}</span>
+                                                            <span class="input-group-addon">
+                                                                    <a role="button"
+                                                                       data-toggle="dropdown"
+                                                                       class="btn btn-default" data-target="#">
+                                                                        <div id="${robot.name}-${port.name}"
+                                                                             name="${robot.name}-${port.name}"
+                                                                             data-toggle="popover"
+                                                                             name="popover">${modelConfig.getDeviceName(port.name)}<span
+                                                                                class="caret"></span></div>
+                                                                    </a>
+                                                                    <ul id="configureMenu"
+                                                                        class="dropdown-menu multi-level" role="menu"
+                                                                        aria-labelledby="dropdownMenu">
+                                                                        <c:forEach var="device" items="${port.devices}">
+                                                                            <c:if test="${device.types.size() > 0}">
+                                                                                <li class="dropdown-submenu">
+                                                                                    <a id="s-${robot.name}-${port.name}"
+                                                                                       tabindex="-1"
+                                                                                       href="#">${device.name}</a>
+                                                                                    <ul class="dropdown-menu">
+                                                                                        <c:forEach var="type"
+                                                                                                   items="${device.types}">
+                                                                                            <li><a href="#"
+                                                                                                   id="s-${robot.name}-${port.name}">${type.name}</a>
+                                                                                            </li>
+                                                                                        </c:forEach>
+
+                                                                                    </ul>
+
+                                                                                </li>
+                                                                            </c:if>
+                                                                            <c:if test="${device.types.size() == 0}">
+                                                                                <li class="dropdown">
+                                                                                    <a tabindex="-1"
+                                                                                       href="#"
+                                                                                       id="s-${port.name}">${device.name}</a>
+                                                                                </li>
+                                                                            </c:if>
+                                                                        </c:forEach>
+                                                                    </ul>
+                                                            </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="tab-pane fade" id="devicesConfig-${robot.name}">
+
+                                                    <div class="row" style="margin-top:20px;" id="configureDeviceMenu">
+
+                                                        <!-- Form Name -->
+
+
+                                                        <div class="btn-group show-on-hover">
+                                                            <button type="button"
+                                                                    class="btn btn-default dropdown-toggle"
+                                                                    data-toggle="dropdown"
+                                                                    id="deviceType-${robot.name}">
+                                                                Device <span
+                                                                    class="caret"></span>
+                                                            </button>
+                                                            <ul class="dropdown-menu" role="menu">
+                                                                <c:forEach var="device"
+                                                                           items="${systemConfig.devices}">
+                                                                    <c:forEach var="type"
+                                                                               items="${device.types}">
+                                                                        <li><a id="configureMenu-${robot.name}"
+                                                                               href="#">${type.name}</a>
+                                                                        </li>
+                                                                    </c:forEach>
+                                                                </c:forEach>
+                                                            </ul>
+                                                        </div>
+
+                                                        <c:forEach var="device"
+                                                                   items="${systemConfig.devices}">
+                                                            <c:forEach var="type"
+                                                                       items="${device.types}">
+
+                                                                <div class="panel" hidden
+                                                                     name="propertyType-${robot.name}"
+                                                                     id="property-${robot.name}-${type.name}">
+                                                                    <div class="well">
+                                                                        <div
+                                                                                class="panel-body form-horizontal payment-form"
+                                                                                id="form-${type.name}"
+                                                                                name="propertyForm-${robot.name}"
+                                                                                id="input-${type.name}">
+                                                                            <c:forEach var="entry"
+                                                                                       items="${type.properties}">
+                                                                                <div class="form-group">
+                                                                                    <label
+                                                                                            name="label-${type.name}"
+                                                                                            class="col-sm-3 control-label">${entry.key}</label>
+
+                                                                                    <div class="col-sm-9">
+                                                                                        <input id="input-${type.name}"
+                                                                                               type="text"
+                                                                                               class="form-control"
+                                                                                               value="${entry.value}"
+                                                                                               name="${entry.key}">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </c:forEach>
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- / panel preview -->
+                                                            </c:forEach>
+                                                        </c:forEach>
+
+
+                                                    </div>
+                                                    <!-- /.row -->
+
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="modal-footer">
+                                                <button type="button" name="saveModelConfig"
+                                                        id="save-model-config-${robot.name}"
+                                                        class="btn btn-primary">Save
+                                                </button>
+                                                <button type="button" class="btn btn-default"
+                                                        data-dismiss="modal">Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <div class="container-fluid well">
+                                    <div class="row-fluid">
+                                        <div class="col-md-4">
+                                            <c:if test="${robotWrapper.status == 'Online'}">
+                                                <img src="images/trik_smile_normal.png"
+                                                     height="65" width="65" class="img-circle">
+                                            </c:if>
+                                            <c:if test="${robotWrapper.status != 'Online'}">
+                                                <img src="images/trik_smile_sad.png"
+                                                     height="65" width="65" class="img-circle">
+                                            </c:if>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <h4>${robot.name}</h4>
+                                            <h6>Status: ${robotWrapper.status}</h6>
+
+                                        </div>
+
+                                        <div class="col-md-4">
+
+                                            <div class="btn-group pull-right">
+                                                <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
+                                                    <li class="glyphicon glyphicon-cog"></li>
+                                                    Action
+                                                    <span class="caret"></span>
+
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <c:if test="${robotWrapper.status == 'Online'}">
+                                                        <li><a href="#" data-toggle="modal"
+                                                               data-target="#sendDiagramModal-${robot.name}"><span
+                                                                class="icon-wrench"></span> Send diagram</a>
+                                                        </li>
+                                                        <li><a href="#" data-toggle="modal"
+                                                               data-target="#configureRobotModal-${robot.name}"><span
+                                                                class="icon-wrench"></span> Configure</a>
+                                                        </li>
+
+
+                                                    </c:if>
+
+                                                    <li><a href='#' name="deleteRobot"
+                                                           id="delete-${robot.name}">
+                                                        <span class="icon-trash"></span>
+                                                        Delete
+                                                    </a>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--/col-span-6-->
+                        </c:forEach>
 
 
                         <div class="col-md-6 ">
@@ -179,6 +625,53 @@
 
                 </div>
 
+                <div class="tab-pane" id="diagrams">
+                    <h1>HERE WILL BE DIAGRAMS MANAGEMENT</h1>
+
+                    <script type="text/javascript">
+                        (function() {
+                            var transport = new Thrift.TXHRTransport("http://localhost:8085/myservlet");
+                            var protocol  = new Thrift.TJSONProtocol(transport);
+                            var client    = new AdditionServiceClient(protocol);
+                            client.ping();
+                            //   console.log(result);
+                        })();
+                    </script>
+                    <form name="calc" id="calculator">
+                        <table>
+                            <tr>
+                                <td>
+                                    <input type="text" name="input" size="16" class="display">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="buttons">
+                                    <input type="button" name="one" value="1" OnClick="calc.input.value += '1'">
+                                    <input type="button" name="two" value="2" OnClick="calc.input.value += '2'">
+                                    <input type="button" name="three" value="3" OnClick="calc.input.value += '3'">
+                                    <input type="button" name="add" value="+" OnClick="calc.input.value += '+'">
+                                    <br>
+                                    <input type="button" name="four" value="4" OnClick="calc.input.value += '4'">
+                                    <input type="button" name="five" value="5" OnClick="calc.input.value += '5'">
+                                    <input type="button" name="six" value="6" OnClick="calc.input.value += '6'">
+                                    <input type="button" name="sub" value="-" OnClick="calc.input.value += '-'">
+                                    <br>
+                                    <input type="button" name="seven" value="7" OnClick="calc.input.value += '7'">
+                                    <input type="button" name="eight" value="8" OnClick="calc.input.value += '8'">
+                                    <input type="button" name="nine" value="9" OnClick="calc.input.value += '9'">
+                                    <input type="button" name="mul" value="x" OnClick="calc.input.value += '*'">
+                                    <br>
+                                    <input type="button" name="clear" value="c" OnClick="calc.input.value = ''">
+                                    <input type="button" name="zero" value="0" OnClick="calc.input.value += '0'">
+                                    <input type="button" name="doit" value="=" OnClick="calc.input.value = eval(calc.input.value)">
+                                    <input type="button" name="div"  value="/" OnClick="calc.input.value += '/'">
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+
+
                 <div class="tab-pane" id="map">
 
                     <div id="yamap" style="width: 100%; height: 600px"></div>
@@ -195,7 +688,6 @@
                 </div>
             </div>
             <!--/row-->
-
         </div>
     </div>
 

@@ -3487,7 +3487,7 @@
                                     var w3cAnimationProp = 'animation';
                                     var w3cTransitionProp = 'transition';
 
-                                    //but some still use vendor-prefixed styles 
+                                    //but some still use vendor-prefixed styles
                                     var vendorAnimationProp = $sniffer.vendorPrefix + 'Animation';
                                     var vendorTransitionProp = $sniffer.vendorPrefix + 'Transition';
 
@@ -7565,17 +7565,17 @@
  *      var deferred = $q.defer();
  *      var promise = deferred.promise;
  *      var resolvedValue;
- * 
+ *
  *      promise.then(function(value) { resolvedValue = value; });
  *      expect(resolvedValue).toBeUndefined();
- * 
+ *
  *      // Simulate resolving of promise
  *      deferred.resolve(123);
  *      // Note that the 'then' function does not get called synchronously.
  *      // This is because we want the promise API to always be async, whether or not
  *      // it got called synchronously or asynchronously.
  *      expect(resolvedValue).toBeUndefined();
- * 
+ *
  *      // Propagate promise resolution to 'then' functions using $apply().
  *      $rootScope.$apply();
  *      expect(resolvedValue).toEqual(123);
@@ -11347,7 +11347,7 @@
         m: dateGetter('Minutes', 1),
         ss: dateGetter('Seconds', 2),
         s: dateGetter('Seconds', 1),
-        // while ISO 8601 requires fractions to be prefixed with `.` or `,` 
+        // while ISO 8601 requires fractions to be prefixed with `.` or `,`
         // we can be just safely rely on using `sss` since we currently don't support single or two digit fractions
         sss: dateGetter('Milliseconds', 3),
         EEEE: dateStrGetter('Day'),

@@ -14,5 +14,6 @@
 
         <mapping resource="echo/User.hbm.xml"></mapping>
         <mapping resource="diagram/Diagram.hbm.xml"></mapping>
+        <mapping resource="robot/Robot.hbm.xml"></mapping>
     </session-factory>
 </hibernate-configuration>

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="<c:url value='../../resources/css/error.css'/>"/>
     <script src="<c:url value='../../resources/js/map.js' />"></script>
     <script src="<c:url value='../../resources/js/robot.js' />"></script>
-
+    <script src="<c:url value='RegisterRobotService.js'/>"> </script>
     <script type="text/javascript">
         $(document).ready(function () {
         });
@@ -27,13 +27,17 @@
 
                 var name = $('#robotName').val();
                 var code = $('#ssid').val();
-                (function() {
-                    var transport = new Thrift.TXHRTransport("http://localhost:8085/myservlet");
-                    var protocol  = new Thrift.TJSONProtocol(transport);
-                    var client    = new AdditionServiceClient(protocol);
-                    client.ping();
+
+                var transport = new Thrift.TXHRTransport("http://localhost:8080/RegisterRobotServlet");
+                var protocol  = new Thrift.TJSONProtocol(transport);
+                var client    = new RegisterRobotServiceClient(protocol);
+                try {
+                    var result = client.registerRobot(name, code);
+                }
+                catch (ouch) {
+                }
                     //   console.log(result);
-                })();
+
                 var data = "robotName=" + name + "&ssid=" + code;
                 $.ajax({
                     type: 'POST',

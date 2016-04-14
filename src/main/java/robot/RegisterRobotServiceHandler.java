@@ -23,6 +23,9 @@ public class RegisterRobotServiceHandler implements RegisterRobotService.Iface {
 
     @Override
     public boolean deleteRobot(String robotName) throws TException {
-        return false;
+        ManageRobot mr = new ManageRobot();
+        Robot robot = mr.findByName(robotName);
+        mr.delete(robot);
+        return true;
     }
 }

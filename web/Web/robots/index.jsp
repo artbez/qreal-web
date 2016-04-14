@@ -33,43 +33,23 @@
                 var client    = new RegisterRobotServiceClient(protocol);
                 try {
                     var result = client.registerRobot(name, code);
+                    location.reload();
                 }
                 catch (ouch) {
                 }
-                    //   console.log(result);
-
-                var data = "robotName=" + name + "&ssid=" + code;
-                $.ajax({
-                    type: 'POST',
-                    url: 'registerRobot',
-                    data: data,
-                    success: function (response) {
-                        var result = JSON.parse(response);
-                        if (result.status == "OK") {
-                            location.reload();
-                        } else {
-                        }
-                    },
-                    error: function (response, status, error) {
-                        console.log("error");
-                    }
-                });
             });
 
             $('[name="deleteRobot"]').click(function (event) {
                 var robotName = event.target.id.substring(7);
-                var data = "robotName=" + robotName;
-                $.ajax({
-                    type: 'POST',
-                    url: 'deleteRobot',
-                    data: data,
-                    success: function (data) {
-                        location.reload();
-                    },
-                    error: function (response, status, error) {
-                        console.log("error");
-                    }
-                });
+
+                var transport = new Thrift.TXHRTransport("http://localhost:8080/RegisterRobotServlet");
+                var protocol  = new Thrift.TJSONProtocol(transport);
+                try {
+                    var result = client.deleteRobot(robotName);
+                    location.reload();
+                }
+                catch (ouch) {
+                }
             });
 
             $('[name="sendDiagram"]').click(function (event) {

@@ -5,16 +5,7 @@
 //
 
 
-if (typeof artemii === 'undefined') {
-  artemii = {};
-}
-if (typeof artemii.bezguzikov === 'undefined') {
-  artemii.bezguzikov = {};
-}
-if (typeof artemii.bezguzikov.qrealweb === 'undefined') {
-  artemii.bezguzikov.qrealweb = {};
-}
-artemii.bezguzikov.qrealweb.Robot = function(args) {
+Robot = function(args) {
   this.id = null;
   this.name = null;
   this.ssid = null;
@@ -34,8 +25,8 @@ artemii.bezguzikov.qrealweb.Robot = function(args) {
     }
   }
 };
-artemii.bezguzikov.qrealweb.Robot.prototype = {};
-artemii.bezguzikov.qrealweb.Robot.prototype.read = function(input) {
+Robot.prototype = {};
+Robot.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -86,7 +77,7 @@ artemii.bezguzikov.qrealweb.Robot.prototype.read = function(input) {
   return;
 };
 
-artemii.bezguzikov.qrealweb.Robot.prototype.write = function(output) {
+Robot.prototype.write = function(output) {
   output.writeStructBegin('Robot');
   if (this.id !== null && this.id !== undefined) {
     output.writeFieldBegin('id', Thrift.Type.I32, 1);
@@ -113,7 +104,7 @@ artemii.bezguzikov.qrealweb.Robot.prototype.write = function(output) {
   return;
 };
 
-artemii.bezguzikov.qrealweb.RobotInfo = function(args) {
+RobotInfo = function(args) {
   this.owner = null;
   this.name = null;
   this.ssid = null;
@@ -141,8 +132,8 @@ artemii.bezguzikov.qrealweb.RobotInfo = function(args) {
     }
   }
 };
-artemii.bezguzikov.qrealweb.RobotInfo.prototype = {};
-artemii.bezguzikov.qrealweb.RobotInfo.prototype.read = function(input) {
+RobotInfo.prototype = {};
+RobotInfo.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -206,7 +197,7 @@ artemii.bezguzikov.qrealweb.RobotInfo.prototype.read = function(input) {
   return;
 };
 
-artemii.bezguzikov.qrealweb.RobotInfo.prototype.write = function(output) {
+RobotInfo.prototype.write = function(output) {
   output.writeStructBegin('RobotInfo');
   if (this.owner !== null && this.owner !== undefined) {
     output.writeFieldBegin('owner', Thrift.Type.STRING, 1);
@@ -243,7 +234,7 @@ artemii.bezguzikov.qrealweb.RobotInfo.prototype.write = function(output) {
   return;
 };
 
-artemii.bezguzikov.qrealweb.RobotWrapper = function(args) {
+RobotWrapper = function(args) {
   this.robot = null;
   this.robotInfo = null;
   this.status = null;
@@ -259,8 +250,8 @@ artemii.bezguzikov.qrealweb.RobotWrapper = function(args) {
     }
   }
 };
-artemii.bezguzikov.qrealweb.RobotWrapper.prototype = {};
-artemii.bezguzikov.qrealweb.RobotWrapper.prototype.read = function(input) {
+RobotWrapper.prototype = {};
+RobotWrapper.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -275,7 +266,7 @@ artemii.bezguzikov.qrealweb.RobotWrapper.prototype.read = function(input) {
     {
       case 1:
       if (ftype == Thrift.Type.STRUCT) {
-        this.robot = new artemii.bezguzikov.qrealweb.Robot();
+        this.robot = new Robot();
         this.robot.read(input);
       } else {
         input.skip(ftype);
@@ -283,7 +274,7 @@ artemii.bezguzikov.qrealweb.RobotWrapper.prototype.read = function(input) {
       break;
       case 2:
       if (ftype == Thrift.Type.STRUCT) {
-        this.robotInfo = new artemii.bezguzikov.qrealweb.RobotInfo();
+        this.robotInfo = new RobotInfo();
         this.robotInfo.read(input);
       } else {
         input.skip(ftype);
@@ -305,7 +296,7 @@ artemii.bezguzikov.qrealweb.RobotWrapper.prototype.read = function(input) {
   return;
 };
 
-artemii.bezguzikov.qrealweb.RobotWrapper.prototype.write = function(output) {
+RobotWrapper.prototype.write = function(output) {
   output.writeStructBegin('RobotWrapper');
   if (this.robot !== null && this.robot !== undefined) {
     output.writeFieldBegin('robot', Thrift.Type.STRUCT, 1);
@@ -327,7 +318,7 @@ artemii.bezguzikov.qrealweb.RobotWrapper.prototype.write = function(output) {
   return;
 };
 
-artemii.bezguzikov.qrealweb.Message = function(args) {
+Message = function(args) {
   this.from = null;
   this.type = null;
   this.robot = null;
@@ -351,8 +342,8 @@ artemii.bezguzikov.qrealweb.Message = function(args) {
     }
   }
 };
-artemii.bezguzikov.qrealweb.Message.prototype = {};
-artemii.bezguzikov.qrealweb.Message.prototype.read = function(input) {
+Message.prototype = {};
+Message.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -381,7 +372,7 @@ artemii.bezguzikov.qrealweb.Message.prototype.read = function(input) {
       break;
       case 3:
       if (ftype == Thrift.Type.STRUCT) {
-        this.robot = new artemii.bezguzikov.qrealweb.RobotInfo();
+        this.robot = new RobotInfo();
         this.robot.read(input);
       } else {
         input.skip(ftype);
@@ -406,7 +397,7 @@ artemii.bezguzikov.qrealweb.Message.prototype.read = function(input) {
         for (var _i5 = 0; _i5 < _size0; ++_i5)
         {
           var elem6 = null;
-          elem6 = new artemii.bezguzikov.qrealweb.RobotInfo();
+          elem6 = new RobotInfo();
           elem6.read(input);
           this.robots.push(elem6);
         }
@@ -424,7 +415,7 @@ artemii.bezguzikov.qrealweb.Message.prototype.read = function(input) {
   return;
 };
 
-artemii.bezguzikov.qrealweb.Message.prototype.write = function(output) {
+Message.prototype.write = function(output) {
   output.writeStructBegin('Message');
   if (this.from !== null && this.from !== undefined) {
     output.writeFieldBegin('from', Thrift.Type.STRING, 1);
@@ -465,7 +456,7 @@ artemii.bezguzikov.qrealweb.Message.prototype.write = function(output) {
   return;
 };
 
-artemii.bezguzikov.qrealweb.Coordinates = function(args) {
+Coordinates = function(args) {
   this.latitude = null;
   this.longitude = null;
   if (args) {
@@ -477,8 +468,8 @@ artemii.bezguzikov.qrealweb.Coordinates = function(args) {
     }
   }
 };
-artemii.bezguzikov.qrealweb.Coordinates.prototype = {};
-artemii.bezguzikov.qrealweb.Coordinates.prototype.read = function(input) {
+Coordinates.prototype = {};
+Coordinates.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -514,7 +505,7 @@ artemii.bezguzikov.qrealweb.Coordinates.prototype.read = function(input) {
   return;
 };
 
-artemii.bezguzikov.qrealweb.Coordinates.prototype.write = function(output) {
+Coordinates.prototype.write = function(output) {
   output.writeStructBegin('Coordinates');
   if (this.latitude !== null && this.latitude !== undefined) {
     output.writeFieldBegin('latitude', Thrift.Type.STRING, 1);

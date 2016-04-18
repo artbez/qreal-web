@@ -1,9 +1,9 @@
 package robot;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import persistence.HibernateUtil;
 
-import org.hibernate.Query;
 import java.util.List;
 
 
@@ -35,5 +35,12 @@ public class ManageRobot {
         List<Robot> robots = session.createQuery("from Robot where name=?").setParameter(0, robotName).list();
         session.close();
         return (robots.size() > 0) ? robots.get(0) : null;
+    }
+
+    public List<Robot> getAllRobots() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Robot> robots = session.createCriteria(Robot.class).list();
+        session.close();
+        return robots;
     }
 }

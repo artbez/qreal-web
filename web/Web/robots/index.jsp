@@ -9,9 +9,21 @@
     <script src="<c:url value='../../resources/js/map.js' />"></script>
     <script src="<c:url value='../../resources/js/robot.js' />"></script>
     <script src="<c:url value='RegisterRobotService.js'/>"> </script>
+    <script src="<c:url value='gen-js/Robot_types.js'/> "></script>
+    <script src="<c:url value='gen-js/robotWrapperService.js'/> "></script>
     <script type="text/javascript">
         $(document).ready(function () {
         });
+    </script>
+    <script>
+        var transport = new Thrift.TXHRTransport("http://localhost:8080/RobotWrapperServlet");
+        var protocol  = new Thrift.TJSONProtocol(transport);
+        var client    = new robotWrapperServiceClient(protocol);
+        try {
+            var robotWrapper = client.getFullRobotInfo();
+        }
+        catch (ouch) {
+        }
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -267,10 +279,8 @@
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane active in" id="robots">
 
-
                     <div class="row">
                         <!-- center left-->
-
                         <c:forEach var="robotWrapper" items="${robotsWrapper}">
                             <c:set var="robot" value="${robotWrapper.robot}"/>
 
@@ -286,12 +296,13 @@
                                         </div>
                                         <div class="modal-body">
 
-                                            <h4>Select diagram</h4>
+                                          <!--  <h4>Select diagram</h4>
                                             <select class="form-control">
                                                 <c:forEach var="diagram" items="${user.diagrams}">
                                                     <option>${diagram.name}</option>
                                                 </c:forEach>
                                             </select>
+                                            -->
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" name="sendDiagram"

@@ -41,6 +41,16 @@
         <servlet-name>RegisterRobotServlet</servlet-name>
         <url-pattern>/RegisterRobotServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <description></description>
+        <display-name>robot.robotWrapperServlet</display-name>
+        <servlet-name>robotWrapperServlet</servlet-name>
+        <servlet-class>robot.robotWrapperServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>robotWrapperServlet</servlet-name>
+        <url-pattern>/RobotWrapperServlet</url-pattern>
+    </servlet-mapping>
 
     <resource-ref>
         <description>This is a MySQL database connection</description>

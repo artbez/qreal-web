@@ -287,14 +287,13 @@
                     <div class="row" ng-app="myApp" ng-controller="myCtrl">
                         <!-- center left-->
                         <div ng-repeat="robotWrapper in robotsWrapper">
-                            {{robotWrapper}}
                             <div ng-init = "robot = robotWrapper.robot">
-
-                            <div class="modal fade" id="sendDiagramModal-{{robot.name}}" tabindex="-1" role="dialog"
-                                 aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-fade" id="sendDiagramModal-{{robot.name}}" tabindex="-1" role="dialog"
+                                 aria-labelledby="myModalLabel" aria-hidden="false">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
+
                                             <button type="button" class="close"
                                                     data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span></button>
@@ -324,6 +323,8 @@
                                 </div>
                             </div>
                             </div>
+
+
                             <div class="modal fade" id="configureRobotModal-{{robot.name}}" tabindex="-1" role="dialog"
                                  aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -491,18 +492,18 @@
                                 </div>
                             </div>
 
-                            <!--
+
                             <div class="col-md-6">
 
                                 <div class="container-fluid well">
                                     <div class="row-fluid">
                                         <div class="col-md-4">
                                             <modal ng-if="{{robotWrapper.status}} == Online">
-                                                <img src="images/trik_smile_normal.png"
+                                                <img src="../redactor/images/trik_smile_normal.png"
                                                      height="65" width="65" class="img-circle">
                                             </modal>
-                                            <ng-if test="${robotWrapper.status != 'Online'}">
-                                                <img src="images/trik_smile_sad.png"
+                                            <ng-if test="{{robotWrapper.status}} != 'Online'">
+                                                <img src="../redactor/images/trik_smile_sad.png"
                                                      height="65" width="65" class="img-circle">
                                             </ng-if>
                                         </div>
@@ -522,6 +523,7 @@
                                                     <span class="caret"></span>
 
                                                 </a>
+                                                <!--
                                                 <ul class="dropdown-menu">
                                                     <ng-if test="{{robotWrapper.status}} == 'Online'">
                                                         <li><a href="#" data-toggle="modal"
@@ -543,6 +545,7 @@
                                                     </a>
                                                     </li>
                                                 </ul>
+                                                -->
 
                                             </div>
                                         </div>
@@ -550,8 +553,8 @@
                                 </div>
 
                             </div>
-                            -->
-                            <!--/col-span-6-->
+
+
                         </div>
 
 
@@ -640,7 +643,7 @@
                     </div>
                 </div>
             </div>
-            <!--/row-->
+
         </div>
     </div>
 
@@ -648,5 +651,5 @@
 </div>
 
 </body>
-
+-->
 </html>

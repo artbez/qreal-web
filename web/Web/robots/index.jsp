@@ -498,14 +498,14 @@
                                 <div class="container-fluid well">
                                     <div class="row-fluid">
                                         <div class="col-md-4">
-                                            <modal ng-if="{{robotWrapper.status}} == Online">
+                                            <div ng-if=" robotWrapper.status == 'Online'">
                                                 <img src="../redactor/images/trik_smile_normal.png"
                                                      height="65" width="65" class="img-circle">
-                                            </modal>
-                                            <ng-if test="{{robotWrapper.status}} != 'Online'">
+                                            </div>
+                                            <div ng-if =" robotWrapper.status != 'Online'">
                                                 <img src="../redactor/images/trik_smile_sad.png"
                                                      height="65" width="65" class="img-circle">
-                                            </ng-if>
+                                            </div>
                                         </div>
 
                                         <div class="col-md-4">
@@ -523,9 +523,9 @@
                                                     <span class="caret"></span>
 
                                                 </a>
-                                                <!--
+
                                                 <ul class="dropdown-menu">
-                                                    <ng-if test="{{robotWrapper.status}} == 'Online'">
+                                                    <div ng-if ="robotWrapper.status == 'Online'">
                                                         <li><a href="#" data-toggle="modal"
                                                                data-target="#sendDiagramModal-{{robot.name}}"><span
                                                                 class="icon-wrench"></span> Send diagram</a>
@@ -536,7 +536,7 @@
                                                         </li>
 
 
-                                                    </ng-if>
+                                                    </div>
 
                                                     <li><a href='#' name="deleteRobot"
                                                            id="delete-{{robot.name}}">
@@ -545,7 +545,7 @@
                                                     </a>
                                                     </li>
                                                 </ul>
-                                                -->
+
 
                                             </div>
                                         </div>
@@ -651,5 +651,5 @@
 </div>
 
 </body>
--->
+
 </html>

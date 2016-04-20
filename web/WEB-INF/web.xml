@@ -51,6 +51,16 @@
         <servlet-name>robotWrapperServlet</servlet-name>
         <url-pattern>/RobotWrapperServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <description></description>
+        <display-name>sysconfigs.ConfigServlet</display-name>
+        <servlet-name>ConfigServlet</servlet-name>
+        <servlet-class>sysconfigs.ConfigServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConfigServlet</servlet-name>
+        <url-pattern>/ConfigServlet</url-pattern>
+    </servlet-mapping>
 
     <resource-ref>
         <description>This is a MySQL database connection</description>

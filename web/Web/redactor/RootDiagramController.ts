@@ -1,4 +1,4 @@
-class RootDiagramController {
+    class RootDiagramController {
 
     constructor($scope, $compile) {
         $scope.root = this;

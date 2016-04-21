@@ -6,6 +6,7 @@ import org.apache.thrift.server.TServlet;
 /**
  * Created by artemiibezguzikov on 20.04.16.
  */
+
 public class ConfigServlet extends TServlet {
     public ConfigServlet() {
         super(
@@ -14,4 +15,6 @@ public class ConfigServlet extends TServlet {
                 new TJSONProtocol.Factory()
         );
     }
+
+
 }

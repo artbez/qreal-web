@@ -1,8 +1,8 @@
 package sysconfigs;
 
-import groovy.ModelConfigParser;
-import groovy.SystemConfigParser;
 import org.apache.thrift.TException;
+
+import java.util.ArrayList;
 
 /**
  * Created by artemiibezguzikov on 20.04.16.
@@ -10,12 +10,15 @@ import org.apache.thrift.TException;
 public class ConfigServiceHandler implements ConfigService.Iface {
     @Override
     public SystemConfig getSystemConfigObject(String systemConfig) throws TException {
-        return new SystemConfigParser().parse(systemConfig);
-      //  return null;
+        SystemConfig sc = new SystemConfig();
+        sc.devices = new ArrayList<Device>();
+        sc.ports = new ArrayList<Port>();
+        return new SystemConfig();
+        //return new SystemConfigParser().parse(systemConfig);
     }
 
     @Override
     public ModelConfig getModelConfigObject(String modelConfig) throws TException {
-        return new ModelConfigParser().parse(modelConfig);
+        return new ModelConfig();//ModelConfigParser().parse(modelConfig);
     }
 }

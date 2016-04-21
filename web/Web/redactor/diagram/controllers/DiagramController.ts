@@ -493,7 +493,7 @@ class DiagramController {
     }
 
     private loadGestures() {
-        var url = "../resources/gestures.json";
+        var url = "resources/gestures.json";
         this.downloadData(url, this.processGestures.bind(this));
     }
 

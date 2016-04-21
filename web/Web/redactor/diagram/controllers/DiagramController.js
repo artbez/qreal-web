@@ -414,7 +414,7 @@ var DiagramController = (function () {
         xhr.send();
     };
     DiagramController.prototype.loadGestures = function () {
-        var url = "../resources/gestures.json";
+        var url = "resources/gestures.json";
         this.downloadData(url, this.processGestures.bind(this));
     };
     DiagramController.prototype.processGestures = function (xhr) {

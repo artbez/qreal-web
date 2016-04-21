@@ -365,12 +365,13 @@
                                                 <li><a href="#devicesConfig-{{robot.name}}" data-toggle="tab">Devices</a>
                                                 </li>
                                             </ul>
-                                            <!--
+
+
                                             <div id="myTabContent33" class="tab-content">
-                                                <div ng-init = "systemConfig = robotWrapper.robotInfo.systemConfigObject">
+                                                <div ng-init = "systemConfig = configClient.getSystemConfigObject(robotWrapper.robotInfo.systemConfig)">
                                                 <div class="tab-pane active in" id="portsConfig-{{robot.name}}">
                                                     <div class="row">
-                                                        <div ng-init="modelConfig = robotWrapper.robotInfo.modelConfigObject">
+                                                        <div ng-init="modelConfig = configClient.getModelConfigObject(robotWrapper.robotInfo.modelConfig)">
                                                         <div ng-repeat="port in systemConfig.ports">
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
@@ -381,39 +382,39 @@
                                                                     <a role="button"
                                                                        data-toggle="dropdown"
                                                                        class="btn btn-default" data-target="#">
+
                                                                         <div id="{{robot.name}}-{{port.name}}"
                                                                              name="{{robot.name}}-{{port.name}}"
                                                                              data-toggle="popover"
-                                                                             name="popover">{{modelConfig.getDeviceName(port.name)}}<span
+                                                                             name="popover">modelConfig.getDeviceName(port.name)<span
                                                                                 class="caret"></span></div>
                                                                     </a>
 
                                                                     <ul id="configureMenu"
                                                                         class="dropdown-menu multi-level" role="menu"
                                                                         aria-labelledby="dropdownMenu">
-                                                                        <div ng-repeat="device in {{port.devices}}">
-                                                                            <ng-if test="{{device.types.size()}} > 0">
+                                                                        <div ng-repeat="device in port.devices">
+                                                                            <div ng-if ="device.types.size() > 0">
                                                                                 <li class="dropdown-submenu">
                                                                                     <a id="s-{{robot.name}}-{{port.name}}"
                                                                                        tabindex="-1"
                                                                                        href="#">{{device.name}}</a>
                                                                                     <ul class="dropdown-menu">
-                                                                                        <div ng-repeat var="type"
-                                                                                                   items="{{device.types}}">
+                                                                                        <div ng-repeat="type in device.types">
                                                                                             <li><a href="#"
-                                                                                                   id="s-{{robot.name}}-{{port.name}}">{{type.name}}</a>
+                                                                                                   id="s-{{robot.name}}-{{port.name}}-{{type.name}}">{{type.name}}</a>
                                                                                             </li>
                                                                                         </div>
                                                                                     </ul>
                                                                                 </li>
-                                                                            </ng-if>
-                                                                            <ng-if test="{{device.types.size() == 0}}">
+                                                                            </div>
+                                                                            <div ng-if="device.types.size() == 0">
                                                                                 <li class="dropdown">
                                                                                     <a tabindex="-1"
                                                                                        href="#"
                                                                                        id="s-{{port.name}}">{{device.name}}</a>
                                                                                 </li>
-                                                                            </ng-if>
+                                                                            </div>
                                                                         </div>
                                                                     </ul>
                                                             </span>
@@ -424,7 +425,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                </div>
+
                                                 <div class="tab-pane fade" id="devicesConfig-{{robot.name}}">
                                                     <div class="row" style="margin-top:20px;" id="configureDeviceMenu">
                                                         <div class="btn-group show-on-hover">
@@ -436,8 +437,8 @@
                                                                     class="caret"></span>
                                                             </button>
                                                             <ul class="dro pdown-menu" role="menu">
-                                                                <div ng-repeat="device in {{systemConfig.devices}}">
-                                                                    <div ng-repeat "type in {{device.types}}">
+                                                                <div ng-repeat="device in systemConfig.devices">
+                                                                    <div ng-repeat="type in device.types">
                                                                         <li><a id="configureMenu-{{robot.name}}"
                                                                                href="#">{{type.name}}</a>
                                                                         </li>
@@ -445,8 +446,8 @@
                                                                 </div>
                                                             </ul>
                                                         </div>
-                                                        <div ng-repeat "device in {{systemConfig.devices}}">
-                                                            <div ng-repeat "type in {{device.types}}">
+                                                        <div ng-repeat="device in systemConfig.devices">
+                                                            <div ng-repeat="type in device.types">
                                                                 <div class="panel" hidden
                                                                      name="propertyType-{{robot.name}}"
                                                                      id="property-{{robot.name}}-{{type.name}}">
@@ -456,13 +457,13 @@
                                                                                 id="form-{{type.name}}"
                                                                                 name="propertyForm-{{robot.name}}"
                                                                                 id="input-{{type.name}}">
-                                                                            <div ng-repeat "entry in {{type.properties}}">
+                                                                            <div ng-repeat="entry in type.properties">
                                                                                 <div class="form-group">
                                                                                     <label
                                                                                             name="label-{{type.name}}"
                                                                                             class="col-sm-3 control-label">{{entry.key}}</label>
                                                                                     <div class="col-sm-9">
-                                                                                        <input id="input-{{type.name}}"
+                                                                                        <input id="input-{{type.name}}-{{entry.key}}"
                                                                                                type="text"
                                                                                                class="form-control"
                                                                                                value="{{entry.value}}"
@@ -473,12 +474,13 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </dib>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                    </div>
                                             </div>
-                                            -->
+
 
                                             <div class="modal-footer">
                                                 <button type="button" name="saveModelConfig"

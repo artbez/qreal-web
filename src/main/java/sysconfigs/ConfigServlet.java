@@ -2,6 +2,7 @@ package sysconfigs;
 
 import org.apache.thrift.protocol.TJSONProtocol;
 import org.apache.thrift.server.TServlet;
+import sysconfigs.thriftgen.*;
 
 /**
  * Created by artemiibezguzikov on 20.04.16.

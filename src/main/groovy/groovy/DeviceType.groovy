@@ -22,7 +22,7 @@ import groovy.transform.EqualsAndHashCode
  * Created by dageev on 03.04.15.
  */
 @EqualsAndHashCode(includeFields = true)
-class DeviceType extends sysconfigs.DeviceType {
+class DeviceType extends sysconfigs.thriftgen.DeviceType {
   //  String name
   //  Map<String, String> properties
 

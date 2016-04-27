@@ -17,7 +17,7 @@
 
   <h1 class="form-signin-heading">Sign In</h1>
 
-  <input type="text" class="form-control" name='username' placeholder="echo.User name" required="" autofocus="" ng-model="username.text">
+  <input type="text" class="form-control" name='username' placeholder="user.thriftgen.User name" required="" autofocus="" ng-model="username.text">
   <input type="password" class="form-control" name='password' placeholder="Password" required="" ng-model="password.text">
   <button class="btn btn-lg btn-primary btn-block" type="submit" value="mlogin" ng-click="mlogin()">
     Sign In

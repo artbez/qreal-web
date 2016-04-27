@@ -1,6 +1,7 @@
 package sysconfigs;
 
 import org.apache.thrift.TException;
+import sysconfigs.thriftgen.*;
 
 import java.util.ArrayList;
 

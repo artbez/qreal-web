@@ -1,6 +1,8 @@
 package robot;
 
-import echo.User;
+import robot.thriftgen.RegisterRobotService;
+import robot.thriftgen.Robot;
+import user.thriftgen.User;
 import org.apache.thrift.TException;
 
 /**

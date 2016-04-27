@@ -3,6 +3,7 @@ package diagram;
 /**
  * Created by artemiibezguzikov on 20.03.16.
  */
+import diagram.thriftgen.DiagramService;
 import org.apache.thrift.protocol.TJSONProtocol;
 import org.apache.thrift.server.TServlet;
 

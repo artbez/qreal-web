@@ -13,9 +13,9 @@
     </filter-mapping>
     <servlet>
         <description></description>
-        <display-name>echo.LoginServlet</display-name>
+        <display-name>user.LoginServlet</display-name>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>echo.LoginServlet</servlet-class>
+        <servlet-class>user.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>

@@ -3,6 +3,7 @@ package robot;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import persistence.HibernateUtil;
+import robot.thriftgen.Robot;
 
 import java.util.List;
 

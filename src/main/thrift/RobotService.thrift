@@ -2,6 +2,6 @@ namespace java robot
 
 include "Robot.thrift"
 
-service robotWrapperService {
+service RobotWrapperService {
     list<Robot.RobotWrapper> getFullRobotInfo();
 }

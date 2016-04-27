@@ -166,5 +166,5 @@ EchoServiceClient.prototype.recv_echo = function() {
   if (null !== result.success) {
     return result.success;
   }
-  throw 'echo failed: unknown result';
+  throw 'user failed: unknown result';
 };

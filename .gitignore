@@ -1,8 +1,6 @@
 .idea/
 .idea/vcs.xml
 out/
-classes/
-web/Web/test/
 web/Web/node_modules/
 target/
 *.map
@@ -10,3 +8,10 @@ target/
 web/out.js
 web/.tscache
 web/node_modules
+src/main/java/diagram/thriftgen/
+src/main/java/robot/thriftgen/
+src/main/java/sysconfigs/thriftgen/
+src/main/java/user/thriftgen/
+web/npm-debug.log
+web/Web/authorization/gen-js
+web/Web/robots/gen-js

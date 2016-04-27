@@ -1,5 +1,7 @@
 package diagram;
 
+import diagram.thriftgen.DiagramDAO;
+import diagram.thriftgen.DiagramService;
 import org.apache.thrift.TException;
 
 /**

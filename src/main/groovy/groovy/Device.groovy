@@ -23,7 +23,7 @@ import groovy.transform.EqualsAndHashCode
  */
 
 @EqualsAndHashCode(includeFields = true)
-class Device extends sysconfigs.Device{
+class Device extends sysconfigs.thriftgen.Device{
   //  String name
   //  Map<String, String> properties
   //  List<String> availablePorts

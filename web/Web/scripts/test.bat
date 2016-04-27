@@ -1,4 +1,4 @@
-@echo off
+@user off
 
 REM Windows script for running unit tests
 REM You have to run server and capture some browser first

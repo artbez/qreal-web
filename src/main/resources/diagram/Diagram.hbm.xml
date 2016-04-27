@@ -3,7 +3,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="diagram.PropertyDAO" table="properties" catalog="ntest">
+    <class name="diagram.thriftgen.PropertyDAO" table="properties" catalog="ntest">
         <id name="propertyId" type="java.lang.Long">
             <column name="property_id"/>
             <generator class="identity"/>
@@ -22,7 +22,7 @@
         </property>
     </class>
 
-    <class name="diagram.DefaultDiagramNodeDAO" table="nodes" >
+    <class name="diagram.thriftgen.DefaultDiagramNodeDAO" table="nodes" >
        <id name="nodeId" type="java.lang.Long">
            <column name="node_id" />
            <generator class="identity"/>
@@ -41,11 +41,11 @@
        </property>
         <set name="properties" table="properties" order-by="position" fetch="join">
             <key column="node_id"></key>
-            <one-to-many class="diagram.PropertyDAO"/>
+            <one-to-many class="diagram.thriftgen.PropertyDAO"/>
         </set>
     </class>
 
-    <class name="diagram.LinkDAO" table="links">
+    <class name="diagram.thriftgen.LinkDAO" table="links">
         <id name="linkId" type="java.lang.Long">
             <column name="link_id"/>
             <generator class="identity"/>
@@ -61,12 +61,12 @@
         </property>
         <set name="properties" table="properties" order-by="position" fetch="join">
             <key column="link_id"></key>
-            <one-to-many class="diagram.PropertyDAO"/>
+            <one-to-many class="diagram.thriftgen.PropertyDAO"/>
         </set>
 
     </class>
 
-    <class name="diagram.DiagramDAO" table="diagrams">
+    <class name="diagram.thriftgen.DiagramDAO" table="diagrams">
         <id name="diagramId" type="java.lang.Long">
             <column name="diagram_id"/>
             <generator class="identity"/>
@@ -76,11 +76,11 @@
         </property>
         <set name="nodes" table="nodes" fetch="join">
             <key column="diagram_id"></key>
-            <one-to-many class="diagram.DefaultDiagramNodeDAO"/>
+            <one-to-many class="diagram.thriftgen.DefaultDiagramNodeDAO"/>
         </set>
         <set name="links" table="links" fetch="join">
             <key column="diagram_id"></key>
-            <one-to-many class="diagram.LinkDAO"/>
+            <one-to-many class="diagram.thriftgen.LinkDAO"/>
         </set>
     </class>
 </hibernate-mapping>

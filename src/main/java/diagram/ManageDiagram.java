@@ -1,5 +1,9 @@
 package diagram;
 
+import diagram.thriftgen.DefaultDiagramNodeDAO;
+import diagram.thriftgen.DiagramDAO;
+import diagram.thriftgen.LinkDAO;
+import diagram.thriftgen.PropertyDAO;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import persistence.HibernateUtil;

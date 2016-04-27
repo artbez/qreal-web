@@ -1,12 +1,12 @@
 namespace java robot
 
-include "Service.thrift"
+include "UserService.thrift"
 
 struct Robot {
     1 : i32 id,
     2 : string name,
     3 : string ssid,
-    4 : Service.User owner
+    4 : UserService.User owner
 }
 
 struct RobotInfo {

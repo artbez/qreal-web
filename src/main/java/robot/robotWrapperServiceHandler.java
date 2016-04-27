@@ -1,6 +1,10 @@
 package robot;
 
 import org.apache.thrift.TException;
+import robot.thriftgen.Robot;
+import robot.thriftgen.RobotInfo;
+import robot.thriftgen.RobotWrapper;
+import robot.thriftgen.robotWrapperService;
 
 import java.util.ArrayList;
 import java.util.List;

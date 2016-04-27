@@ -2,6 +2,7 @@ package robot;
 
 import org.apache.thrift.protocol.TJSONProtocol;
 import org.apache.thrift.server.TServlet;
+import robot.thriftgen.RegisterRobotService;
 
 /**
  * Created by artemiibezguzikov on 13.04.16.

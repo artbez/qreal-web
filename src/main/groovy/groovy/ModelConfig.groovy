@@ -22,7 +22,7 @@ import groovy.xml.MarkupBuilder
  * Created by dageev on 26.03.15.
  */
 
-class ModelConfig extends sysconfigs.ModelConfig {
+class ModelConfig extends sysconfigs.thriftgen.ModelConfig {
  //   Map<String, String> devicePorts
  //   Map<String, Map<String, String>> typeProperties;
 

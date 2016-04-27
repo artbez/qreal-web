@@ -1,5 +1,6 @@
 package diagram;
 
+import diagram.thriftgen.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import persistence.HibernateUtil;

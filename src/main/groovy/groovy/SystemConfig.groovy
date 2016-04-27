@@ -22,7 +22,7 @@ import groovy.transform.TupleConstructor
  * Created by dageev on 26.03.15.
  */
 @TupleConstructor
-class SystemConfig extends sysconfigs.SystemConfig {
+class SystemConfig extends sysconfigs.thriftgen.SystemConfig {
     ArrayList<Device> devices
     ArrayList<Port> ports
 }
